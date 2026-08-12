@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olha — Performance Marketing Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#0c3cff;
+    --dark:#121212;
+    --muted:#6e6e6e;
+    --border:#bfbfbf;
+    --border-light:#e4e4e4;
+    --bg:#fbfbfb;
+    --white:#ffffff;
+    --placeholder:#c4c4c4;
+    --placeholder-bg:#eeeeee;
+    --maxw:1328px;
+  }
+
+  *{box-sizing:border-box;}
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top:96px;
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--dark);
+    font-family:'IBM Plex Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(251,251,251,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border-light);
+  }
+  .header-inner{
+    max-width:1440px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 56px;
+  }
+  .menu-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    display:flex;
+    align-items:center;
+    color:var(--dark);
+  }
+  .menu-btn svg:last-child{display:none;}
+  .menu-btn.menu-btn--opened svg:first-child{display:none;}
+   .menu-btn.menu-btn--opened svg:last-child{
+    display:block;}
+  .menu-btn:hover svg path{
+    stroke:var(--blue);
+  }
+  .header-actions{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .inline-btn{
+    display:inline-flex;
+    max-width: auto;
+    flex-grow: 0;
+    align-items:center;
+    gap:8px;
+    font-weight:500;
+    font-size:18px;
+    color:#323232;
+    cursor:pointer;
+    border-top:2px solid transparent;
+    border-bottom:2px solid transparent;
+    padding:2px 0;
+  }
+  .inline-btn:hover{
+    border-bottom: 2px solid var(--blue);
+    color: var(--blue);
+  }
+
+  .inline-btn:hover svg{stroke:var(--blue);}
+
+  .btn-primary{
+    background:var(--blue);
+    color:var(--white);
+    font-weight:500;
+    font-size:18px;
+    padding:16px 32px;
+    border-radius:26px;
+    border:none;
+    cursor:pointer;
+    display:inline-block;
+    transition:background .15s ease;
+  }
+  .btn-primary:hover{box-shadow: 0px 0px 12.1px 0px #0C3CFF8A;}
+
+  nav.mobile-nav{
+    display:none;
+    flex-direction:column;
+    gap:4px;
+    padding:16px 56px 24px;
+    border-top:1px solid var(--border-light);
+  }
+  nav.mobile-nav a{
+    padding:4px 0;
+    font-weight:500;
+    font-size:16px;
+  }
+  nav.mobile-nav .inline-btn{
+    align-self:flex-start;
+    width:max-content;
+  }
+  header.open nav.mobile-nav{display:flex;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:1440px;
+    margin:0 auto;
+    padding:120px 56px 80px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+    text-align:center;
+  }
+  .hero-top{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:24px;
+    max-width:700px;
+  }
+  .hero h1{
+    font-family:'IBM Plex Sans',sans-serif;
+    font-weight:700;
+    font-size:clamp(48px,9vw,96px);
+    text-transform:uppercase;
+    margin:0;
+    line-height:1.1;
+  }
+  .hero-name{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .hero-avatar{
+    width:74px;
+    height:89px;
+    border-radius:37px;
+    overflow:hidden;
+    flex-shrink:0;
+    background:var(--placeholder);
+  }
+  .hero-avatar img{width:100%;height:100%;object-fit:cover;}
+  .hero-tagline{
+    font-weight:500;
+    font-size:clamp(20px,3vw,32px);
+    line-height:1.5;
+    margin:0;
+    max-width:700px;
+  }
+  .hero-tagline .highlight{color:var(--blue);}
+
+  .hero-tags{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+  }
+  .pill{
+    background:var(--blue);
+    color:var(--white);
+    font-weight:500;
+    font-size:18px;
+    padding:12px 18px;
+    border-radius:26px;
+    white-space:nowrap;
+  }
+  .dot{color:var(--dark);opacity:.4;}
+
+  .hero-stats{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:680px;
+  }
+  .stat{
+    flex:1 1 160px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:24px;
+  }
+  .stat .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    color:var(--blue);
+    font-size:clamp(40px,6vw,72px);
+    line-height:1;
+  }
+  .stat .label{
+    font-weight:500;
+    font-size:16px;
+    line-height:1.2;
+  }
+
+  /* ---------- Gallery strip ---------- */
+  .gallery-section{
+    padding:64px 0;
+  }
+  .section-heading{
+    text-align:center;
+    max-width:1120px;
+    margin:0 auto 56px;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+    padding:0 24px;
+  }
+  .section-heading h2{
+    font-weight:700;
+    font-size:clamp(30px,5vw,56px);
+    text-transform:uppercase;
+    margin:0;
+    line-height:1.2;
+  }
+  .section-heading p{
+    font-weight:500;
+    font-size:clamp(16px,2vw,24px);
+    margin:0;
+    color:var(--dark);
+  }
+
+  .gallery-row{
+    overflow:hidden;
+    scrollbar-width:none;
+  }
+  .gallery-row::-webkit-scrollbar{display:none;}
+  .gallery-row + .gallery-row{margin-top:24px;}
+  .gallery-track{
+    display:flex;
+    gap:23px;
+    padding:8px 24px 16px;
+  }
+  .gallery-card{
+    flex:0 0 231px;
+    height:380px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:22px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .gallery-card .ph{
+    width:197px;
+    height:346px;
+    border-radius:8px;
+    background:linear-gradient(160deg,var(--placeholder),#dcdcdc);
+  }
+  .gallery-card img{
+    width:197px;
+    height:346px;
+    object-fit:cover;
+    border-radius:8px;
+  }
+  .case57-gallery{
+    width:100vw;
+    max-width:none;
+    margin:0 calc(50% - 50vw) 96px;
+  }
+  .case57-gallery .gallery-card{padding:16px;}
+  .case57-gallery .gallery-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:8px;
+  }
+  .case-gallery{
+    max-width:var(--maxw);
+    margin:0 auto 96px;
+    padding:0 24px;
+    display:flex;
+    gap:32px;
+    align-items:flex-start;
+    overflow-x:auto;
+    scrollbar-width:none;
+    justify-content:space-between;
+  }
+  .case-gallery::-webkit-scrollbar{display:none;}
+  .case-gallery .case-image{margin:0;}
+
+  /* ---------- Cases label ---------- */
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:32px;
+    padding:0 24px;
+    max-width:var(--maxw);
+    margin:0 auto;
+  }
+  .section-label span{
+    color:var(--blue);
+    font-weight:700;
+    font-size:32px;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .section-label .line{
+    flex:1;
+    height:1px;
+    background:var(--border-light);
+  }
+  .info-section > .section-label{
+    width:100%;
+    padding:0;
+  }
+
+  /* ---------- Process / cases ---------- */
+  .process-section{padding:96px 0;}
+  .case-card{
+    display:flex;
+    gap:32px;
+    max-width:var(--maxw);
+    margin:0 auto 96px;
+    padding:0 24px;
+    align-items:flex-start;
+  }
+  .case-image{
+    flex:0 0 393px;
+    width:393px;
+    height:675px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:28px;
+    overflow:hidden;
+    padding: 16px;
+  }
+  .case-image img{width:100%;height:100%;object-fit:cover;border-radius:15.37px;}
+  .case-body{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+  }
+  .case-number{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .case-number .label{
+    color:var(--border);
+    font-weight:700;
+    font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .case-number .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    color:var(--blue);
+    font-size:44px;
+  }
+  .case-title-block{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .case-title-block h3{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    font-size:clamp(22px,3vw,32px);
+    text-transform:uppercase;
+    line-height:1.2;
+    margin:0;
+  }
+  .case-title-block p{
+    font-weight:500;
+    font-size:16px;
+    line-height:1.5;
+    margin:0;
+    color:var(--dark);
+  }
+  .case-details{
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+  }
+  .field h4{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    color:var(--blue);
+    font-size:24px;
+    text-transform:uppercase;
+    margin:0 0 16px;
+  }
+  .field p{
+    font-weight:500;
+    font-size:14px;
+    line-height:1.45;
+    margin:0;
+    color:var(--dark);
+  }
+  .field .note{
+    font-style:italic;
+    font-weight:500;
+    color:var(--border);
+    font-size:12px;
+    margin-top:12px;
+  }
+  .field ul{
+    list-style:disc;
+    padding-left:18px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .field ul li{
+    font-weight:500;
+    font-size:14px;
+    line-height:1.45;
+  }
+  .field ul li b{font-weight:700;}
+
+  .field-row{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+  }
+  .field-row .field{flex:1 1 220px;}
+
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+  }
+  .tag{
+    background:var(--blue);
+    color:var(--white);
+    font-weight:500;
+    font-size:14px;
+    padding:8px 11px;
+    border-radius:26px;
+    white-space:nowrap;
+  }
+  .tag-sep{color:var(--dark);opacity:.35;}
+
+  hr.divider{
+    border:none;
+    border-top:1px solid var(--border-light);
+    margin:0;
+  }
+
+  .case-link{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    color:var(--blue);
+    font-size:16px;
+    text-transform:uppercase;
+    text-decoration:underline;
+    display:inline-block;
+  }
+
+  /* ---------- About / Contact ---------- */
+  .info-section{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:96px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:56px;
+  }
+  .about-grid{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+  }
+  .about-text{
+    flex:1 1 400px;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+  }
+  .about-text p{
+    font-weight:500;
+    font-size:18px;
+    line-height:1.5;
+    margin:0;
+  }
+  .about-text .highlight{color:var(--blue);font-weight:700;}
+  .tools-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 16px;
+    color:var(--muted);
+    font-weight:500;
+    font-size:18px;
+  }
+  .principles{
+    flex:1 1 400px;
+    display:flex;
+    flex-direction:column;
+    gap:23px;
+  }
+  .principle{
+    display:flex;
+    gap:24px;
+    align-items:flex-start;
+    padding:32px 16px;
+    border:1px solid var(--border);
+    border-radius:18px;
+    background:var(--white);
+  }
+  .principle .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    color:var(--blue);
+    font-size:56px;
+    line-height:1.1;
+  }
+  .principle p{
+    margin:0;
+    font-size:18px;
+    line-height:1.5;
+  }
+  .principle p b{font-weight:700;}
+  .principle p span{font-weight:500;}
+
+  .contact-heading{
+    font-weight:700;
+    font-size:32px;
+    text-transform:uppercase;
+    margin:0;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:minmax(0,50%) 270px;
+    gap:32px;
+  }
+  .contact-copy{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+    font-weight:500;
+    font-size:20px;
+    line-height:1.5;
+  }
+  .contact-copy p{margin:0;}
+  .contact-links{
+    width:270px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    justify-content:flex-start;
+  }
+  .contact-links a{
+    color:var(--blue);
+    font-weight:500;
+    font-size:20px;
+  }
+  .contact-links a:hover{text-decoration:underline;}
+
+  footer{
+    text-align:center;
+    padding:40px 24px 56px;
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  @media (max-width:900px){
+    .header-inner{padding:16px 24px;}
+    .hero{padding:80px 24px 56px;}
+    .case-card{flex-direction:column;}
+    .case-image{
+      width:min(100%,300px);
+      flex:none;
+      height:auto;
+      aspect-ratio:393/675;
+      align-self:center;
+    }
+    #casesContainer .case-card:has(+ .case57-gallery){margin-bottom:32px;}
+    .case57-gallery{margin-bottom:32px;}
+    .process-section{padding-bottom:32px;}
+    #contact.info-section{padding-top:48px;}
+    .field-row{flex-direction:column;gap:24px;}
+    .field-row .field{flex:0 1 auto;}
+    .about-grid{flex-direction:column;}
+    .contact-grid{grid-template-columns:1fr;}
+    .contact-links{width:min(270px,100%);}
+    .dot{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="header-inner">
+    <button type="button" class="menu-btn" id="menuToggle" aria-label="Menu">
+      <svg aria-label="Menu" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg aria-label="Close" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 6L6 18M6 6L18 18" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+    </button>
+    <div class="header-actions">
+      <a class="inline-btn" href="#" download>
+        <svg aria-label="Download Icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3V15M12 15L7 10M12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download CV
+      </a>
+      <a class="btn-primary" href="#contact">Contact Me</a>
+    </div>
+  </div>
+  <nav class="mobile-nav">
+    <a class="inline-btn" href="#cases">Cases</a>
+    <a class="inline-btn" href="#about">About</a>
+    <a class="inline-btn" href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-top">
+    <h1>hi!</h1>
+    <div class="hero-name">
+      <h1 style="display:inline">i&rsquo;m</h1>
+      <div class="hero-avatar"><img src="https://www.figma.com/api/mcp/asset/c9a15cb8-7afe-4221-9ecc-a1c48245589d.png" alt="Olha"></div>
+      <h1 style="display:inline">olha</h1>
+    </div>
+    <p class="hero-tagline">a performance marketing designer, and I'm not here to make things pretty. <span class="highlight">I'm here to make things win</span>.</p>
+  </div>
+
+  <div class="hero-tags">
+    <span class="pill">Performance-driven</span>
+    <span class="dot">•</span>
+    <span class="pill">Research-backed</span>
+    <span class="dot">•</span>
+    <span class="pill">AI-assisted workflows</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><span class="num">3+</span><span class="label">years<br>in performance marketing</span></div>
+    <div class="stat"><span class="num">5+</span><span class="label">years in design overall</span></div>
+    <div class="stat"><span class="num">80+</span><span class="label">top-performing creatives shipped in a single year</span></div>
+  </div>
+</section>
+
+<section id="about" class="info-section">
+  <div class="section-label">
+    <span>About</span>
+    <div class="line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>3 years in performance marketing, backed by 5 years in design overall. I don't design what looks good in a deck — <span class="highlight">I design what wins in the feed</span>.</p>
+      <p>I've shipped <span class="highlight">1,000+ creative packs</span> in a single year, with dozens becoming top performers — not by accident, but because I went deep into the marketing side, not just the visual one. <span class="highlight">A creative isn't done when it looks good. It's done when it works.</span></p>
+      <p>Along the way, I've worked across skincare, music, lifestyle, and pet care — different products, different audiences, same obsession with what actually converts.</p>
+      <div class="tools-row">
+        <span>Figma</span><span>•</span><span>Adobe Suite</span><span>•</span><span>Lovart</span><span>•</span><span>Meta Ad Library</span><span>•</span><span>Midjourney</span><span>•</span><span>ChatGPT / Claude</span><span>•</span><span>Basic Motion (After Effects)</span>
+      </div>
+    </div>
+    <div class="principles">
+      <div class="principle"><span class="num">01</span><p><b>I research before I design.</b> <span>No blank pages — I start from what's already resonating.</span></p></div>
+      <div class="principle"><span class="num">02</span><p><b>I bring ideas, not just execution.</b> <span>Most of my strongest work started as something I proposed.</span></p></div>
+      <div class="principle"><span class="num">03</span><p><b>AI speeds up my process, not my thinking.</b> <span>The direction and decisions stay mine.</span></p></div>
+      <div class="principle"><span class="num">04</span><p><b>Results close the loop.</b> <span>Every choice is judged by performance, not just looks.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="section-label">
+    <span>cases</span>
+    <div class="line"></div>
+  </div>
+
+  <div class="section-heading" style="margin-top:56px;">
+    <h2>Different products. Same process</h2>
+    <p>A slice of what's shipped — skincare, utility, and productivity apps.</p>
+  </div>
+
+  <div class="gallery-section">
+    <div class="gallery-row embla" id="galleryRow1"></div>
+    <div class="gallery-row embla" id="galleryRow2"></div>
+  </div>
+</section>
+
+<section class="process-section">
+  <div class="section-heading">
+    <h2>Here's that process in action</h2>
+    <p>From spotting a pattern to scaling it into results.</p>
+  </div>
+
+  <div id="casesContainer"></div>
+</section>
+
+<section id="contact" class="info-section">
+  <div class="section-label" style="padding:0;">
+    <span>Contact</span>
+    <div class="line"></div>
+  </div>
+  <h3 class="contact-heading">Let's talk!</h3>
+  <div class="contact-grid">
+    <div class="contact-copy">
+      <p>Looking for a performance designer who thinks past the pixel?<br>Let's talk.</p>
+      <p>I'm looking for a team where design is treated as a business tool rather than just visual execution. I enjoy contributing to the entire creative process — from research and concept development to testing and optimization — while collaborating closely with marketers to create high-performing campaigns.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:olga.gyrdymova1@gmail.com" target="_blank">olga.gyrdymova1@gmail.com</a>
+      <a href="https://www.linkedin.com/in/olha-hyrdymova/" target="_blank">Linkedin</a>
+      <a href="https://t.me/lefilletulipe" target="_blank">Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Olha. All rights reserved.</footer>
+
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
+<script>
+// Menu toggle
+const siteHeader = document.getElementById('siteHeader');
+const menuToggle = document.getElementById('menuToggle');
+
+function closeMenu(){
+  siteHeader.classList.remove('open');
+  menuToggle.classList.remove('menu-btn--opened');
+}
+
+menuToggle.addEventListener('click', function(){
+  siteHeader.classList.toggle('open');
+  menuToggle.classList.toggle('menu-btn--opened');
+});
+
+document.addEventListener('click', function(event){
+  if(siteHeader.classList.contains('open') && !siteHeader.contains(event.target)){
+    closeMenu();
+  }
+});
+
+document.querySelectorAll('nav.mobile-nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+// Top gallery images, shuffled once per page load and split across both rows.
+const carouselImages = [
+  '1844_4_v1755_9_sttai_Sora_brk_VY_OH_0725 1.png',
+  '1858_1_v1682_3_stt_free_VY_OH_0725 3.png',
+  '2038_1_stt_rct_VY_OH_0825 1.png',
+  '2101_4_1167_stt_pn_AA_OH_0825 1.png',
+  '2135_1_v1966_4_stt_Sora_brk_VY_OH_0925 1.png',
+  '3064_1_stt_rct_pwc_VK_OH_1225 1.png',
+  '3064_3_stt_rct_pwc_VK_OH_1225 1.png',
+  '3385_2_v3069_stt_stt_rct_YL_OH_0126 1.png',
+  '3475_3_v3125_stt_lv_stt_love_AY_OH_0126 1.png',
+  '3484_4_stt_vgs_vgn_rct_VK_OH_0126 1.png',
+  '3511_3_stt_pun_stt_obd_VY_OH_0126 1.png',
+  '3626_3_stt_ppp_tp_AA_OH_0126 1.png',
+  '3880_2_stt_ppp_2d_bc_day_YL_OH_0226 1.png',
+  '4223_3_stt_ppp_pn_AA_OH_0326 1.png',
+  '4246_3_v4040_1_stt_lv_rct_AY_OH_0326 1.png',
+  '4272_3_stt_pup_fdh_VY_OH_0326 1.png',
+  '5511_2_v4223_3_ppp_stt_pn_OH_OH_var_0626_slftsk 2.png',
+  'AD-0040_2_9x16_EN_banner_LAYERYOUNG 1.png',
+  'AD-0041_3_9x16_EN_banner_SKINCARESTRUGGLES 1.png',
+  'AD-0043_4_9x16_EN_banner_SKINCARE ROUTINE 1.png',
+  'AD-0059_1_1x1_EN_banner_menopausejars 1.png',
+  'AD-0078_3_9x16_EN_banner_layeringwright 1.png',
+  'AD-0114_2_9x16_EN_banner_MenopausalSkin 1.png',
+  'AD-0166_1_9x16_BridalSkincare\u2028 1.png',
+  'AD-0171_2_9x16_LikeAHeadway 1.png',
+  'AD-0221_1_9x16_EN_banner_AzelaicAcid 1.png',
+  'AD-0222_3_9x16_EN_banner_Acids 1.png',
+  'AD-0226_3_9x16_EN_banner_LayerArticle 1.png',
+  'AD-0261_3_9x16_EN_banner_re0131 1.png',
+  'AD-0378_2_9x16_EN_banner_RetinolLikeMoisturise 1.png',
+  'AD-0380_1_9x16_re0210what_i_am_layering_wrong 1.png',
+  'AD-0517_3_9x16_EN_banner_reLayering3Steps 1.png',
+  'AD-0525_1_9x16_EN_banner_MoisturizingUseIt 1.png',
+  'AD-0562_3_9x16_EN_banner_Looking for smile 1.png',
+  'AD-0588_1_9x16_EN_banner_age 1.png',
+  'AD-0589_3_9x16_EN_banner_skin type 1.png',
+  'AD-0608_3_9x16_EN_banner_reSkincareTablePlan 1.png',
+  'AD-0713_2_9x16_EN_banner_LikeDuolingoButForSkin 1.png',
+  'AD-2107_1_9x16_EN_banner_PosterSkincare 1.png',
+  'AD-2108_1_9x16_EN_banner_StopLayeringWrongDays030 1.png',
+  'AD-2111_1_9x16_EN_banner_AdventCalendarLovi 1.png',
+  'AD_0250_3_9x16_EN_banner_re0218 1.png',
+  'AD_0329_3_9x16_EN_banner_5signs 1.png',
+  'AD_0331_2_9x16_EN_banner_Skincaretips 1.png',
+  'AD_0337_3_9x16_EN_banner_RyzeAdaptation 1.png',
+  'AD_0339_3_9x16_EN_banner_HowTo 1.png',
+  'DropPhoneToiletA1_size_9_16 1.png',
+  'ML_2_IDONTWANT_ALL_PROSCATINATION_STATIC_1A_size_9_16 1.png',
+  'ML_4_THISISHOW_ALL_EQ_STATIC_1A_size_9_16 1.png',
+  'ML_4_THISISHOW_ALL_PROCRASTINATION_STATIC_1A_size_9_16 1.png',
+  'ML_5_PLEASEPLEASE_ALL_PROCRASTINATION_STATIC_1A_size_9_16 1.png',
+  'gt_6SignsUkuleleStatistic_1a_size_9_16 1.png',
+  'gt_NegativeReview_1a_size_9_16 1.png',
+  'memeA1_size_9_16 1.png',
+  'statsA1_size_9_16 1.png',
+  'vm_150_AnxietyWorkload_1a_size_9_16 1.png',
+  'vm_150_AnxietyWorkload_1b_size_9_16 1.png',
+  'vm_154_minutesAi_1b_size_9_16 1.png',
+  'vm_161_PerfectPlanner_1b_size_9_16 1.png',
+  'vm_162_domuch_1a_size_9_16 1.png',
+  'vm_163_sixsteps_1a_size_9_16 1.png',
+  'vm_173_Voicetext_1a_size_9_16 1.png',
+  'vm_185_Productivity_7b_size_9_16 1.png',
+  'vm_192_StopClutter_1a_size_9_16 1.png',
+  'vm_204_static_FiveMinutes_1a_size_9_16 1.png',
+  'vm_205_static_TypeTest_1a_size_9_16 1.png',
+  'vm_225_static_ComicsGirl_1a_size_9_16 1.png',
+  'vm_227_static_CleanUpWorkFlow_1b_size_9_16 1.png',
+  'vm_242_static_StudyProblems_1b_size_9_16 1.png',
+  'vm_59_O_MentalNoise_1a_size_9_16 1.png',
+  'vm_ADHDBrain_1a_size_9_16 1.png',
+  'vm_Ceo_1a_size_9_16 1.png',
+  'vm_Cooler_1a_size_9_16 1.png',
+  'vm_MEAT_1a_size_9_16 1.png',
+  'vm_Overthinking_1a_size_9_16 1.png'
+].map(name => ({
+  src: `/carousel/${name}`,
+  alt: 'Selected creative'
+}));
+
+function shuffleImages(images){
+  const shuffled = [...images];
+  for(let i = shuffled.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+const shuffledCarouselImages = shuffleImages(carouselImages);
+const carouselSplit = Math.ceil(shuffledCarouselImages.length / 2);
+buildImageGalleryRow('galleryRow1', shuffledCarouselImages.slice(0, carouselSplit));
+buildImageGalleryRow('galleryRow2', shuffledCarouselImages.slice(carouselSplit));
+
+function initContinuousCarousel(id, direction){
+  const viewport = document.getElementById(id);
+  const emblaApi = EmblaCarousel(viewport, {
+    align: 'start',
+    containScroll: false,
+    dragFree: true,
+    loop: true
+  }, [EmblaCarouselAutoScroll({
+    defaultInteraction: false,
+    direction,
+    speed: 1,
+    startDelay: 0
+  })]);
+
+  const autoScroll = emblaApi.plugins().autoScroll;
+  autoScroll.play();
+  emblaApi.on('pointerUp', () => autoScroll.play(1500));
+}
+
+initContinuousCarousel('galleryRow1', 'forward');
+initContinuousCarousel('galleryRow2', 'backward');
+
+// Case studies data
+const cases = [
+  {
+    num: '01',
+    title: 'One creative, a full year of campaigns',
+    subtitle: 'Turned a single top-performing ad into a reusable seasonal system — cutting the need to build new creative from scratch for every launch. Still viewable in Meta Ad Library.',
+    image: 'https://www.figma.com/api/mcp/asset/f53e6090-3e1b-452e-9817-4dc98f03ff57.png',
+    value: 'Spotted a plateauing creative pattern, proposed a new visual direction, and turned one successful bet into a repeatable system — reducing both production costs and time-to-launch for future campaigns.',
+    objective: "Text-on-dog's-back creatives were already a working pattern for the account — but the visual execution had plateaued. I proposed exploring a new illustrative style within that same message format, betting that a distinct visual language could extend the pattern's lifespan and open it up to seasonal scaling.",
+    role: ['Visual Direction','Visual Execution','AI-assisted Asset Creation'],
+    roleNote: 'In collaboration with a Creative Manager, who developed the campaign concept and copy.',
+    deliverables: ['Meta Static Ads','Creative Variations','Multi-language Localizations'],
+    process: 'Instead of iterating on the existing photo-based look, I pushed for a different direction: a hand-drawn, woodcut-inspired illustration style, betting it would interrupt the scroll better in a feed full of flat, high-saturation ads. AI-assisted workflows let me test the idea fast rather than leave it a hypothesis.',
+    impact: [
+      '<b>Validated the bet</b> — became one of the account\'s top-performing creatives, staying in rotation far longer than typical',
+      '<b>Turned a single win into a system</b> — extended it into fall and winter/holiday variations myself',
+      '<b>Made scaling easy</b> — the visual system proved reusable, enabling smooth localization'
+    ],
+    link: { text: '↗ View live ad on Meta Ad Library', href: 'https://www.facebook.com/ads/library/?id=787259600531708' }
+  },
+  {
+    num: '02',
+    title: 'A character style that became a reusable asset',
+    subtitle: 'Turned an early signal from a pencil-style creative into a distinct illustrated character style — reused across multiple offers and funnels, outperforming account benchmarks.',
+    image: 'https://www.figma.com/api/mcp/asset/6ee29008-ac0f-471a-9b21-8f8b722ef21e.png',
+    value: 'Spotted that a pencil-drawn creative was resonating, then developed it into a distinct, reusable illustration style — giving the team a visual asset that could be redeployed across new offers without starting from zero each time.',
+    objective: 'Given a rough visual reference as a starting point, I set out to develop it into a distinct illustrated character style — something expressive enough to carry a message on its own, and flexible enough to reuse across future campaigns.',
+    role: ['Visual Direction','Illustration Design','Visual Execution'],
+    roleNote: 'In collaboration with a Creative Manager, who developed the campaign concept and copy.',
+    deliverables: ['Custom Dog Illustrations','Meta Static Ads','Creative Variations','Marketing Assets'],
+    process: "Starting from the reference, I developed a full set of expressive, hand-drawn dog characters — playful and slightly chaotic, designed to feel distinct from typical polished ad visuals. Once the style proved itself, I adapted it as a reusable pattern across different offers and funnels, rather than treating it as a one-off asset.",
+    impact: [
+      '<b>Outperformed account benchmarks</b> — stronger conversion and return than the account\'s typical creative',
+      '<b>Built once, reused often</b> — turned the style into a flexible system, cutting design time for new offers',
+      '<b>Proved reusable across offers</b> — applied successfully to different promotional messages, not just the original'
+    ]
+  },
+  {
+    num: '03',
+    title: 'Building a direction, then scaling it',
+    subtitle: 'Researched competitors to create an original messaging angle — then scaled it across seasons, formats, and specific pain points, producing several other top-performing creatives along the way.',
+    image: 'https://www.figma.com/api/mcp/asset/f1cd47d7-ae8b-43a2-ab8a-76c814b82e82.png',
+    value: "Took full ownership of a creative direction from research to final execution — then proved it wasn't a one-off by extending it three different ways: into a new season, a new structural format, and a narrower, higher-anxiety pain point. One idea, systematically scaled.",
+    objective: 'Rather than iterating on existing formats, I researched competitor creatives to spot recurring messaging patterns, then shaped an original angle and voice of my own — "I\'m begging you." Once it proved itself, I set out to test how far it could stretch: across seasons, structures, and specific customer pain points, without losing what made it work.',
+    role: ['Creative Research','Visual Design','Concept Development','Copywriting (AI-assisted)','Illustration (AI-assisted)'],
+    deliverables: ['10+ Final Visuals','Copy Variations','Seasonal Adaptation','Creative Concept','Original Visual Direction'],
+    process: 'Started by analyzing competitor creatives to identify recurring messaging patterns, then shaped an original angle — a direct, urgent tone under the "I\'m begging you" hook. Once it proved itself, I extended it three ways: adapted it for a summer campaign, keeping the emotional core but rebuilding the visual world around it; restructured it into a listicle + reframe format ("these aren\'t personality traits — they\'re gaps in structure") to deepen the psychological pull; and niched that same structure down to one specific, high-anxiety behavior — biting — to test whether the mechanism held at a narrower focus.',
+    impact: [
+      'Opened a direction that kept winning — the original angle went on to produce several other top-performing creatives, not just itself',
+      'Proved the direction was scalable, not a one-off — the seasonal adaptation outperformed the original, the strongest return of the entire series',
+      'Built a reusable mechanism, not just a message — the listicle + reframe structure worked whether targeting general obedience or one specific behavior'
+    ]
+  },
+  {
+    num: '04',
+    title: 'A format built to be reused across funnels',
+    subtitle: 'Adapted an existing concept into original copy, executed it independently, then turned the format itself into a system — redeployed across different funnels with entirely new messaging.',
+    image: 'https://www.figma.com/api/mcp/asset/2a23b09f-168a-4789-a767-1159258c817d.png',
+    value: 'Rather than treating each new funnel as a fresh design task, I rewrote the copy myself and built out the full creative — then proved the format could carry completely different messages, cutting the need to design from scratch for every new funnel.',
+    objective: 'Starting from an existing concept, I adapted the copy to fit our audience and voice, then executed the full creative independently — testing whether the format itself, not just the message, could become a reusable system across funnels.',
+    role: ['Competitor Research','Visual Design','Copywriting (AI-assisted)'],
+    deliverables: ['Creative Concept','Final Visual','Copy Variations'],
+    process: 'Rewrote the copy from the original reference to match our audience and tone, then designed the full creative around it. Once the format proved itself, I reused the same visual structure for other funnels — swapping in new copy each time rather than rebuilding the design from zero.',
+    impact: [
+      'Delivered return well above typical account performance — strong ROI at a lower-than-average acquisition cost',
+      'Built a reusable format, not a one-off — the same structure carried entirely different messaging into other funnels'
+    ]
+  },
+  {
+    num: '05',
+    title: 'One offer, 20+ visual directions',
+    subtitle: "Owned the visual direction for the account's core free-trial offer — proposing new styles myself, and reusing our top-performing copy and composition where it made sense to boost results. All creatives in this set were top performers.",
+    image: '/cases/5/4256_2_stt_rfnd_free_OH_OH_0326_freestyle%201.png',
+    value: "Most of these creatives were my own ideas from the start — I proposed the visual direction. For part of the set, I deliberately reused our top-performing copy block and composition instead of testing something new, betting that a proven combination would earn more than a fresh one.",
+    objective: "Keep the account's strongest free-trial offer performing across styles and seasons without letting it go stale.",
+    role: ['Visual Direction','Visual Execution','AI-assisted Asset Creation'],
+    roleNote: 'In collaboration with a Creative Manager, who developed the campaign concept and copy.',
+    deliverables: ['Meta Static Ads','Seasonal Adaptations','20+ Creative Variations'],
+    process: 'Proposed and built most of the visual directions myself — folk-art, photoreal pet portraits, seasonal (Christmas) treatments, minimalist mirror-teaser. For a portion of the set, reused the top-performing copy block and circle-badge composition as-is, betting the proven combination would outperform a new one. AI-assisted workflows let me move through style directions fast without slowing the testing pace.',
+    impact: [
+      'Every creative in this set was a top performer.',
+      'Reused proven copy and composition where it counted — a deliberate bet on strength over novelty for part of the set.'
+    ]
+  },
+  {
+    num: '06',
+    title: 'One hook, many seasons',
+    subtitle: 'Owned the visual direction for most of the account\'s "regretting bringing a puppy home" series — adapting one strong emotional hook across seasons, formats, and tones as the Creative Manager expanded the copy angle.',
+    image: '/cases/6/4197_2_v3665_2_stt_pup_rgt_OH_OH_0326_freestyle%202.png',
+    value: 'The Creative Manager developed the copy angle — a raw, relatable admission ("feeling the puppy blues?") — and kept extending it into new seasons and formats. I owned the visual direction for most of the set, building out the majority of the variations myself.',
+    objective: 'Keep one strong emotional hook performing across a full year, adapting it to season and format without losing what made it work.',
+    role: ['Visual Direction','Visual Execution','AI-assisted Asset Creation'],
+    roleNote: 'In collaboration with a Creative Manager, who developed the campaign concept and copy.',
+    deliverables: ['Meta Static Ads','Seasonal Adaptations','20+ Creative Variations'],
+    process: 'Built most of the visual variations for the fixed emotional copy block — fall gouache illustration, winter Christmas treatment, listicle format, calendar-grid format, humorous chaos-art tone. AI-assisted workflows let me move through seasons and tones fast enough to keep the direction fresh across a full year.',
+    impact: [
+      'Every creative in this set was a top performer.',
+      'The strongest hook in the account by volume of variations — one emotional truth carried across seasons, formats, and tones.'
+    ]
+  },
+  {
+    num: '07',
+    title: 'Multiple visual solutions, one problem',
+    subtitle: "Owned the visual execution for the account's potty-training offer, exploring several different visual directions for the same core message.",
+    image: '/cases/7/2015_1_stt_pt_VY_OH_0825%201.png',
+    value: 'The offer needed more than one visual solution to stay fresh. I explored multiple directions — pattern-based badges, photo-texture compositions, line-art — for the same underlying problem.',
+    objective: 'Keep the potty-training offer visually fresh across multiple creative directions.',
+    role: ['Visual Direction','Visual Execution','AI-assisted Asset Creation'],
+    roleNote: 'In collaboration with a Creative Manager, who developed the campaign concept and copy.',
+    deliverables: ['Meta Static Ads','Seasonal Adaptations','20+ Creative Variations'],
+    process: 'Explored several visual directions for the same problem: photo-texture compositions (soapy tile, paw prints), a circle-badge pattern series with multiple backgrounds (line-art puppies on a potty, sketch-style dachshunds, photo-realistic golden retriever puppies), and a line-art treatment. AI-assisted workflows let me move through directions fast enough to keep testing pace.',
+    impact: [
+      'Every creative in this set was a top performer.',
+      'Multiple visual solutions kept the same offer performing without visual fatigue.'
+    ]
+  }
+];
+
+function tagRow(items){
+  return items.map((t,i)=>`<span class="tag">${t}</span>${i<items.length-1?'<span class="tag-sep">•</span>':''}`).join('');
+}
+
+function renderCase(c){
+  const el = document.createElement('div');
+  el.className = 'case-card';
+  el.innerHTML = `
+    <div class="case-image"><img src="${c.image}" alt="${c.title}" loading="lazy"></div>
+    <div class="case-body">
+      <div class="case-number"><span class="label">case</span><span class="num">${c.num}</span></div>
+      <div class="case-title-block">
+        <h3>${c.title}</h3>
+        <p>${c.subtitle}</p>
+      </div>
+      <div class="case-details">
+        <div class="field"><h4>Value</h4><p>${c.value}</p></div>
+        <hr class="divider">
+        <div class="field-row">
+          <div class="field"><h4>Objective</h4><p>${c.objective}</p></div>
+          <div class="field">
+            <h4>Role</h4>
+            <div class="tag-row">${tagRow(c.role)}</div>
+            ${c.roleNote ? `<p class="note">${c.roleNote}</p>` : ''}
+          </div>
+          <div class="field"><h4>Deliverables</h4><div class="tag-row">${tagRow(c.deliverables)}</div></div>
+        </div>
+        <hr class="divider">
+        <div class="field-row">
+          <div class="field"><h4>Process</h4><p>${c.process}</p></div>
+          <div class="field"><h4>Impact</h4><ul>${c.impact.map(i=>`<li>${i}</li>`).join('')}</ul></div>
+        </div>
+      </div>
+      ${c.link ? `<a class="case-link" href="${c.link.href}" target="_blank">${c.link.text}</a>` : ''}
+    </div>
+  `;
+  return el;
+}
+
+const container = document.getElementById('casesContainer');
+const case03GalleryImages = [
+  {
+    src: 'https://www.figma.com/api/mcp/asset/38fe7a60-3d01-4fea-8e1e-baf5b9d20241.png',
+    alt: 'I\'m begging you puppy obedience creative with illustrated dogs'
+  },
+  {
+    src: 'https://www.figma.com/api/mcp/asset/de63131b-2d07-4638-9e98-5670fd435bf0.png',
+    alt: 'I\'m begging you puppy obedience creative with colorful abstract background'
+  },
+  {
+    src: 'https://www.figma.com/api/mcp/asset/f43dd205-bec2-4976-861b-78773b956e65.png',
+    alt: 'I\'m begging you puppy obedience creative with white paper background'
+  }
+];
+function localCaseImages(caseNum, names, alt){
+  return names.map(name => ({
+    src: `/cases/${caseNum}/${name}.png`,
+    sources: [
+      { src: `/cases/${caseNum}/${name}.png`, density: '1x' },
+      { src: `/cases/${caseNum}/${name}@2x.png`, density: '2x' },
+      { src: `/cases/${caseNum}/${name}@3x.png`, density: '3x' }
+    ],
+    alt
+  }));
+}
+const case5Images = localCaseImages('5', [
+  '1858_1_v1682_3_stt_free_VY_OH_0725 3',
+  '1858_2_v1682_3_stt_free_VY_OH_0725 1',
+  '1858_4_v1682_3_stt_free_VY_OH_0725 1',
+  '1858_5_v1682_5_stt_free_VY_OH_0725 2',
+  '1907_6_stt_free_VY_OH_0725 1',
+  '2126_6_stt_free_AA_OH_0925 1',
+  '2169_2_v1997_2_stt_free_VY_OH_0925 1',
+  '3116_1_stt_free_OY_OH_1225 1',
+  '3116_2_stt_free_OY_OH_1225 1',
+  '3254_1_stt_free_VK_OH_0126 1',
+  '3254_4_stt_free_VK_OH_0126 1',
+  '3698_1_v1858_1_stt_rfnd_free_OH_OH_0226_freestyle 1',
+  '3698_3_v1858_1_stt_rfnd_free_OH_OH_0226_freestyle 1',
+  '3699_3_v1858_5_stt_rfnd_free_OH_OH_0226_freestyle 1',
+  '4060_3_stt_rfnd_free_OH_OH_0326_freestyle 1',
+  '4256_2_stt_rfnd_free_OH_OH_0326_freestyle 1',
+  '4258_1_stt_rfnd_free_OH_OH_0326_freestyle 1'
+], 'Case 05 free-trial creative');
+const case6Images = localCaseImages('6', [
+  '2328_5_v1239_stt_rgt_AA_OH_0925 2',
+  '2384_2_v1558_12_stt_rgt_VY_OH_1025 1',
+  '2531_1_stt_rgt_VY_OH_1025 1',
+  '2786_2_v1239_stt_xmas_rgt_VY_OH_1125 1',
+  '2786_4_v1239_stt_xmas_rgt_VY_OH_1125 1',
+  '3665_1_stt_ppp_rgt_AA_OH_0226 2',
+  '3665_2_stt_ppp_rgt_AA_OH_0226 2',
+  '3665_3_stt_ppp_rgt_AA_OH_0226 2',
+  '4197_2_v3665_2_stt_pup_rgt_OH_OH_0326_freestyle 2'
+], 'Case 06 puppy blues creative');
+const case7Images = localCaseImages('7', [
+  '2015_1_stt_pt_VY_OH_0825 1',
+  '2015_4_stt_pt_VY_OH_0825 1',
+  '2997_3_v1238_4_stt_pp_pt_q5_AA_OH_1225 1',
+  '3744_2_stt_ppp_pt_AA_OH_0226 (1) 1',
+  '3816_1_stt_pup_pp_pt_VY_OH_0226 1',
+  '3816_3_stt_pup_pp_pt_VY_OH_0226 1',
+  '4061_3_v3936_1_stt_pup_pt_pp_VY_OH_0326 1'
+], 'Case 07 potty-training creative');
+
+function renderCaseGallery(){
+  const gallery = document.createElement('div');
+  gallery.className = 'case-gallery';
+  gallery.setAttribute('aria-label', 'Creative gallery');
+  gallery.innerHTML = case03GalleryImages.map(image => `
+    <div class="case-image">
+      <img src="${image.src}" alt="${image.alt}" loading="lazy">
+    </div>
+  `).join('');
+  return gallery;
+}
+
+function appendCase57Gallery(caseNum, images){
+  const gallery = document.createElement('div');
+  const rowId = `caseGallery${caseNum}Row`;
+  gallery.className = 'case57-gallery';
+  gallery.innerHTML = `<div class="gallery-row embla" id="${rowId}"></div>`;
+  container.appendChild(gallery);
+  buildImageGalleryRow(rowId, images);
+  initContinuousCarousel(rowId, caseNum === '06' ? 'backward' : 'forward');
+}
+
+cases.forEach(c => {
+  container.appendChild(renderCase(c));
+  if (c.num === '02' || c.num === '03') container.appendChild(renderCaseGallery());
+  if (c.num === '05') appendCase57Gallery(c.num, case5Images);
+  if (c.num === '06') appendCase57Gallery(c.num, case6Images);
+  if (c.num === '07') appendCase57Gallery(c.num, case7Images);
+});
+
+function buildImageGalleryRow(id, images){
+  const row = document.getElementById(id);
+  const track = document.createElement('div');
+  track.className = 'gallery-track';
+  const totalCards = images.length * 3;
+
+  for(let i=0;i<totalCards;i++){
+    const card = document.createElement('div');
+    card.className = 'gallery-card';
+    const image = images[i % images.length];
+    const src = encodeURI(image.src);
+    const srcset = image.sources
+      ? ` srcset="${image.sources.map(source => `${encodeURI(source.src)} ${source.density}`).join(', ')}" sizes="197px"`
+      : '';
+    card.innerHTML = `<img src="${src}"${srcset} alt="${image.alt}" loading="lazy">`;
+    track.appendChild(card);
+  }
+  row.appendChild(track);
+}
+
+</script>
+</body>
+</html>
